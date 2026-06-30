@@ -1,0 +1,502 @@
+<style>
+:root{
+  --font-sans:"Noto Sans Arabic","Tajawal","Segoe UI",Arial,sans-serif;
+  --surface-0:#f6f8fb;
+  --surface-1:#ffffff;
+  --surface-2:#ffffff;
+  --surface-soft:#f8fafc;
+  --text-primary:#102033;
+  --text-secondary:#526173;
+  --text-muted:#7c8794;
+  --text-accent:#1d4ed8;
+  --text-success:#047857;
+  --text-warning:#b45309;
+  --text-danger:#b91c1c;
+  --text-pro:#6d28d9;
+  --on-accent:#ffffff;
+  --border:#dce3ec;
+  --border-strong:#cbd5e1;
+  --border-warning:#facc15;
+  --bg-accent:#dbeafe;
+  --bg-success:#dcfce7;
+  --bg-warning:#fef3c7;
+  --bg-danger:#fee2e2;
+  --bg-pro:#ede9fe;
+  --bg-neutral:#f1f5f9;
+  --fill-accent:#2563eb;
+  --fill-danger:#dc2626;
+  --radius:14px;
+  --shadow-sm:0 8px 20px rgba(15,23,42,.08);
+  --shadow-md:0 18px 45px rgba(15,23,42,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);direction:rtl;text-align:right;background:linear-gradient(180deg,#eef5ff 0%,#f8fafc 36%,#ffffff 100%);color:var(--text-primary)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+body>div{max-width:1180px;margin:auto}
+.top-bar{position:relative;overflow:hidden;background:linear-gradient(135deg,#0f3f85 0%,#2563eb 48%,#14b8a6 100%);border:0;border-radius:26px;padding:1.35rem 1.5rem;margin-bottom:1rem;box-shadow:var(--shadow-md);color:white}
+.top-bar:before{content:"";position:absolute;inset:-55px auto auto -55px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.16)}
+.top-bar:after{content:"";position:absolute;inset:auto 45% -70px auto;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.10)}
+.top-inner{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.college-logo{display:flex;align-items:center;gap:12px}
+.logo-circle{width:54px;height:54px;border-radius:18px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.logo-circle i{color:#fff!important;font-size:26px!important}
+.college-name{font-size:20px;font-weight:800;color:#fff;line-height:1.45;letter-spacing:-.02em}
+.college-sub{font-size:13px;color:rgba(255,255,255,.82);margin-top:4px}
+.badge-group{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+.badge{font-size:12px;font-weight:700;padding:7px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:5px;backdrop-filter:blur(8px)}
+.b-blue,.b-gray,.b-warn{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1rem}
+.sc{position:relative;overflow:hidden;background:rgba(255,255,255,.88);border:1px solid rgba(203,213,225,.75);border-radius:20px;padding:14px 16px;text-align:center;box-shadow:var(--shadow-sm)}
+.sc:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#2563eb,#14b8a6,#f59e0b)}
+.sn{font-size:28px;font-weight:850;color:var(--text-primary);line-height:1}
+.sl{font-size:12px;color:var(--text-muted);margin-top:7px;font-weight:650}
+.dept{background:rgba(255,255,255,.95);border:1px solid rgba(203,213,225,.86);border-radius:24px;margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.dept:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:#bfdbfe}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.1rem;background:linear-gradient(180deg,#ffffff,#f8fafc);border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.dh-r{display:flex;align-items:center;gap:12px}
+.dicon{width:42px;height:42px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+.dtitle{font-size:16px;font-weight:800;color:var(--text-primary)}
+.dsub{font-size:12px;color:var(--text-secondary);margin-top:3px}
+.chev{font-size:16px;color:var(--text-muted);transition:transform .2s;background:var(--surface-soft);border:1px solid var(--border);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+.dbody{padding:1rem 1.1rem;display:none;background:linear-gradient(180deg,#ffffff,#fbfdff)}
+.dbody.open{display:block}
+.chair-row{display:flex;align-items:center;gap:10px;margin-bottom:.85rem;background:#f8fafc;border:1px solid var(--border);border-radius:16px;padding:8px 10px}
+.chair-lbl{font-size:12px;color:var(--text-secondary);white-space:nowrap;font-weight:700}
+.chair-input{flex:1;font-size:13px;padding:8px 11px;border:1px solid var(--border-strong);border-radius:12px;background:var(--surface-1);color:var(--text-primary);font-family:var(--font-sans);outline:none}
+.chair-input:focus,.ff input:focus,.ff textarea:focus,.ff select:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,.22)}
+.warn-box{background:linear-gradient(90deg,#fff7ed,#fffbeb);border:1px solid #fed7aa;border-radius:16px;padding:10px 12px;font-size:12px;color:var(--text-warning);margin-bottom:.85rem;display:flex;align-items:flex-start;gap:7px;font-weight:650}
+.ptable{width:100%;border-collapse:separate;border-spacing:0 8px;font-size:13px;table-layout:fixed}
+.ptable th{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);padding:4px 10px;text-align:right;border-bottom:none}
+.ptable td{padding:10px 10px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);vertical-align:middle;background:#fff}
+.ptable tr:not(.cat-row) td:first-child{border-radius:0 14px 14px 0;border-right:1px solid var(--border)}
+.ptable tr:not(.cat-row) td:last-child{border-radius:14px 0 0 14px;border-left:1px solid var(--border)}
+.ptable tr:last-child td{border-bottom:1px solid var(--border)}
+.pname{font-weight:800;color:var(--text-primary);font-size:13px;line-height:1.5}
+.plevel{font-size:11px;color:var(--text-muted);margin-top:2px}
+.ftag{background:var(--bg-danger);color:var(--text-danger);font-size:10px;padding:2px 7px;border-radius:999px;margin-left:6px;font-weight:800;display:inline-flex}
+.dcell{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+button{font-family:var(--font-sans);transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
+button:hover{transform:translateY(-1px);filter:brightness(.99)}
+.btn-o,.btn-f,.btn-ro{font-size:11px;font-weight:800;padding:6px 11px;border-radius:999px;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;gap:4px}
+.btn-o{border-color:#86efac;background:var(--bg-success);color:var(--text-success)}
+.btn-f{border-color:#fecaca;background:var(--bg-danger);color:var(--text-danger)}
+.btn-ro{border-color:#fde68a;background:var(--bg-warning);color:var(--text-warning)}
+.btn-f.sel{background:var(--fill-danger);color:#fff;border-color:var(--fill-danger);box-shadow:0 8px 18px rgba(220,38,38,.18)}
+.dbadge{font-size:11px;font-weight:800;padding:6px 10px;border-radius:999px;display:inline-flex;align-items:center;gap:4px}
+.db-o{background:var(--bg-success);color:var(--text-success)}
+.db-f{background:var(--bg-danger);color:var(--text-danger)}
+.db-ro{background:var(--bg-warning);color:var(--text-warning)}
+.status-act,.status-frz{font-size:10px;padding:4px 8px;border-radius:999px;font-weight:800;display:inline-flex;gap:3px;align-items:center}
+.status-act{background:var(--bg-success);color:var(--text-success)}
+.status-frz{background:var(--bg-danger);color:var(--text-danger)}
+.cat-row td{padding:12px 10px 3px!important;font-size:12px;font-weight:900;color:#334155;text-transform:uppercase;letter-spacing:.04em;border:none!important;background:transparent!important}
+.ff{background:linear-gradient(180deg,#fff7ed,#ffffff);border:1px solid #fed7aa;border-radius:18px;padding:.85rem;margin-top:4px;display:none}
+.ff.show{display:block}
+.ff.active-form{background:linear-gradient(180deg,#f0fdf4,#ffffff);border-color:#bbf7d0}
+.ff.frozen-form{background:linear-gradient(180deg,#fff7ed,#ffffff);border-color:#fed7aa}
+.ff-title{font-size:12px;font-weight:800;color:var(--text-warning);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.flbl{font-size:11px;font-weight:800;color:var(--text-secondary);display:block;margin:9px 0 4px;text-transform:uppercase;letter-spacing:.03em}
+.flbl:first-of-type{margin-top:0}
+.ff input,.ff textarea,.ff select{width:100%;font-family:var(--font-sans);font-size:13px;background:var(--surface-1);border:1px solid var(--border-strong);border-radius:12px;padding:8px 10px;color:var(--text-primary);direction:rtl;outline:none}
+.ff select{appearance:auto;cursor:pointer;font-weight:700;color:var(--text-secondary)}
+.delivery-card{background:#eff6ff;border:1px solid #bfdbfe;border-radius:16px;padding:10px;margin:10px 0 2px;box-shadow:0 6px 14px rgba(37,99,235,.06)}
+.delivery-card .flbl{text-transform:none;font-size:12px;margin-top:0;margin-bottom:5px;color:#1d4ed8}
+.ff textarea{min-height:62px;resize:vertical;line-height:1.6}
+.req-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.req-card{background:#ffffff;border:1px solid var(--border);border-radius:16px;padding:10px;box-shadow:0 6px 14px rgba(15,23,42,.04)}
+.req-card .flbl{text-transform:none;font-size:12px;margin-top:0;margin-bottom:5px}
+.req-card input{font-size:12px}
+.sec-div{font-size:11px;font-weight:900;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 7px;padding-bottom:5px;border-bottom:1px dashed var(--border-strong)}
+.sub-bar{display:flex;align-items:center;gap:10px;padding:1rem 0 0;background:transparent;border-top:1px dashed var(--border);flex-wrap:wrap;margin-top:4px}
+.btn-sub{background:linear-gradient(135deg,#2563eb,#14b8a6);color:var(--on-accent);border:none;border-radius:999px;padding:9px 18px;font-size:13px;font-weight:850;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 10px 22px rgba(37,99,235,.20)}
+.btn-clear{background:#ffffff;border:1px solid var(--border-strong);border-radius:999px;padding:9px 15px;font-size:13px;color:var(--text-primary);cursor:pointer;font-weight:750}
+.ok-msg{font-size:12px;color:var(--text-success);display:none;align-items:center;gap:4px;font-weight:800}
+@media(max-width:760px){body>div{padding-left:.5rem!important;padding-right:.5rem!important}.stats{grid-template-columns:repeat(2,1fr)}.ptable{table-layout:auto;font-size:12px}.ptable th:nth-child(2),.ptable td:nth-child(2){display:none}.chair-row,.req-grid{grid-template-columns:1fr;display:grid}.badge-group{justify-content:flex-start}.college-name{font-size:17px}}
+</style>
+
+<h2 class="sr-only">لوحة تخطيط البرامج الأكاديمية — كلية فلسطين التقنية دير البلح — العام الدراسي 2026/2027</h2>
+
+<div style="padding:.75rem 0">
+
+<div class="top-bar">
+  <div class="top-inner">
+    <div class="college-logo">
+      <div class="logo-circle"><i class="ti ti-school" style="font-size:20px;color:var(--text-accent)" aria-hidden="true"></i></div>
+      <div>
+        <div class="college-name">كلية فلسطين التقنية — دير البلح</div>
+        <div class="college-sub">Palestine Technical College &nbsp;·&nbsp; لوحة تخطيط البرامج الأكاديمية</div>
+      </div>
+    </div>
+    <div class="badge-group">
+      <span class="badge b-blue"><i class="ti ti-calendar" aria-hidden="true"></i> العام الدراسي 2026/2027</span>
+      <span class="badge b-warn"><i class="ti ti-clock" aria-hidden="true"></i> آخر موعد: 2 يوليو 2026</span>
+      <span class="badge b-gray"><i class="ti ti-user-shield" aria-hidden="true"></i> الشؤون الأكاديمية</span>
+    </div>
+  </div>
+</div>
+<div class="top-bar" style="font-size:12px;color:var(--text-secondary);line-height:1.7">
+  <strong style="color:var(--text-primary)">ملاحظة تحقق:</strong> بُنيت قائمة البرامج وفق صفحة التخصصات الرسمية لكلية فلسطين التقنية - دير البلح كما ظهرت بتاريخ 30 يونيو 2026، مع تطبيق حالة التجميد التي زوّدتم بها للتخصصات المحددة.
+</div>
+
+<div class="stats">
+  <div class="sc"><div class="sn">6</div><div class="sl">الأقسام</div></div>
+  <div class="sc"><div class="sn" id="st-total">0</div><div class="sl">مجموع التخصصات</div></div>
+  <div class="sc"><div class="sn" id="st-o" style="color:var(--text-success)">0</div><div class="sl">مقترح فتحه</div></div>
+  <div class="sc"><div class="sn" id="st-f" style="color:var(--text-danger)">0</div><div class="sl">مقترح تجميده</div></div>
+</div>
+
+<div id="dc"></div>
+</div>
+
+<script>
+const DEPTS=[
+  {
+    id:'eng',icon:'ti-tool',color:'background:var(--bg-accent);color:var(--text-accent)',
+    name:'قسم المهن الهندسية',
+    sub:'Engineering Professions Department',
+    programs:[
+      {id:'e1',name:'بكالوريوس هندسة أنظمة الحاسوب',en:'B.Sc. Computer Systems Engineering',lvl:'بكالوريوس',frz:false},
+      {id:'e2',name:'دبلوم الاتصالات السلكية واللاسلكية',en:'Telecommunications',lvl:'دبلوم',frz:true},
+      {id:'e3',name:'دبلوم التحكم الصناعي',en:'Industrial Control',lvl:'دبلوم',frz:true},
+      {id:'e4',name:'دبلوم الصيانة الإلكترونية',en:'Electronic Maintenance',lvl:'دبلوم',frz:false},
+      {id:'e5',name:'دبلوم التركيبات الكهربائية',en:'Electrical Installations',lvl:'دبلوم',frz:true},
+      {id:'e6',name:'دبلوم التبريد والتكييف',en:'Refrigeration & Air Conditioning',lvl:'دبلوم',frz:true},
+    ]
+  },
+  {
+    id:'acad',icon:'ti-flask',color:'background:var(--bg-neutral);color:var(--text-secondary);border:0.5px solid var(--border)',
+    name:'القسم الأكاديمي',
+    sub:'Academic Department',
+    programs:[
+      {id:'a1',name:'بكالوريوس علوم التغذية والصحة العامة',en:'B.Sc. Nutrition Sciences & Public Health',lvl:'بكالوريوس',frz:false},
+      {id:'a2',name:'بكالوريوس التربية التكنولوجية',en:'B.Sc. Technology Education',lvl:'بكالوريوس',frz:false},
+    ]
+  },
+  {
+    id:'cs',icon:'ti-device-laptop',color:'background:var(--bg-success);color:var(--text-success)',
+    name:'قسم الحاسوب',
+    sub:'Computer Department',
+    programs:[
+      {id:'c1',name:'بكالوريوس تكنولوجيا الويب وأمن المعلومات',en:'B.Sc. Web Technology & Information Security',lvl:'بكالوريوس',frz:false},
+      {id:'c2',name:'بكالوريوس الوسائط المتعددة',en:'B.Sc. Multimedia Technology',lvl:'بكالوريوس',frz:false},
+      {id:'c3',name:'دبلوم تصميم مواقع الإنترنت',en:'Web Design',lvl:'دبلوم',frz:false},
+      {id:'c4',name:'دبلوم البرمجيات وقواعد البيانات',en:'Software & Databases',lvl:'دبلوم',frz:true},
+      {id:'c5',name:'دبلوم الوسائط المتعددة والرسوم المتحركة',en:'Multimedia & Animation Diploma',lvl:'دبلوم',frz:false},
+    ]
+  },
+  {
+    id:'biz',icon:'ti-briefcase',color:'background:var(--bg-warning);color:var(--text-warning)',
+    name:'قسم الأعمال الإدارية والمالية',
+    sub:'Administrative & Financial Business Department',
+    programs:[
+      {id:'b1',name:'بكالوريوس إدارة الأعمال الإلكترونية',en:'B.Sc. Electronic Business Administration',lvl:'بكالوريوس',frz:false},
+      {id:'b6',name:'بكالوريوس المحاسبة والتمويل',en:'B.Sc. Accounting & Finance',lvl:'بكالوريوس',frz:false},
+      {id:'b7',name:'بكالوريوس الإدارة الإلكترونية - فرعي إدارة مالية',en:'B.Sc. Electronic Management - Financial Management Track',lvl:'بكالوريوس',frz:false},
+      {id:'b8',name:'بكالوريوس الإدارة الإلكترونية - فرعي محاسبة',en:'B.Sc. Electronic Management - Accounting Track',lvl:'بكالوريوس',frz:false},
+      {id:'b2',name:'دبلوم الإدارة وأتمتة المكاتب',en:'Administration & Office Automation Diploma',lvl:'دبلوم',frz:false},
+      {id:'b3',name:'دبلوم تقنيات التسويق الرقمي',en:'Digital Marketing Technologies Diploma',lvl:'دبلوم',frz:false},
+      {id:'b4',name:'دبلوم الإعلان والتسويق',en:'Advertising & Marketing Diploma',lvl:'دبلوم',frz:false},
+      {id:'b5',name:'دبلوم المحاسبة والتأمين',en:'Accounting & Insurance Diploma',lvl:'دبلوم',frz:false},
+    ]
+  },
+  {
+    id:'media',icon:'ti-camera',color:'background:var(--bg-danger);color:var(--text-danger)',
+    name:'قسم الإعلام والفنون التطبيقية',
+    sub:'Media & Applied Arts Department',
+    programs:[
+      {id:'m1',name:'بكالوريوس الإعلام الإذاعي والتلفزيوني',en:'B.Sc. Radio & TV Broadcasting',lvl:'بكالوريوس',frz:false},
+      {id:'m2',name:'دبلوم الإعلام الرقمي',en:'Digital Media',lvl:'دبلوم',frz:false},
+      {id:'m3',name:'دبلوم فنون التلفزيون',en:'Television Arts',lvl:'دبلوم',frz:true},
+      {id:'m4',name:'دبلوم تصميم الأزياء وصناعة الملابس',en:'Fashion Design & Garment Manufacturing',lvl:'دبلوم',frz:true},
+    ]
+  },
+  {
+    id:'hotel',icon:'ti-building',color:'background:var(--bg-pro);color:var(--text-pro)',
+    name:'قسم إدارة الفنادق',
+    sub:'Hotel Management Department',
+    programs:[
+      {id:'h1',name:'بكالوريوس الإدارة الفندقية والسياحية',en:'B.Sc. Hotel & Tourism Management',lvl:'بكالوريوس',frz:false},
+      {id:'h2',name:'دبلوم إدارة الطعام والشراب',en:'Food & Beverage Management',lvl:'دبلوم',frz:false},
+      {id:'h3',name:'دبلوم إدارة الإيواء',en:'Accommodation Management',lvl:'دبلوم',frz:true},
+    ]
+  }
+];
+
+const dec={};
+
+function calcTotal(){return DEPTS.reduce((s,d)=>s+d.programs.length,0);}
+
+function toggle(id){
+  const b=document.getElementById('b-'+id),c=document.getElementById('c-'+id);
+  b.classList.toggle('open');
+  c.style.transform=b.classList.contains('open')?'rotate(180deg)':'';
+}
+
+function getProg(pid){for(const d of DEPTS)for(const p of d.programs)if(p.id===pid)return p;}
+
+function setDec(pid,val){
+  dec[pid]=val;
+  renderCell(pid);
+  const ff=document.getElementById('ff-'+pid);
+  if(ff){
+    if(val==='o'||val==='ro')ff.classList.add('show');
+    else ff.classList.remove('show');
+  }
+  updateStats();
+}
+
+function clearDec(pid){
+  delete dec[pid];
+  const ff=document.getElementById('ff-'+pid);if(ff)ff.classList.remove('show');
+  renderCell(pid);
+  updateStats();
+}
+
+function renderCell(pid){
+  const p=getProg(pid);
+  const v=dec[pid];
+  const cell=document.getElementById('dc-'+pid);
+  if(!cell)return;
+  let h='';
+  if(!v){
+    if(p.frz){
+      h+=`<button class="btn-ro" onclick="setDec('${pid}','ro')"><i class="ti ti-lock-open" aria-hidden="true"></i> طلب الفتح</button>`;
+      h+=`<button class="btn-f sel" onclick="setDec('${pid}','f')"><i class="ti ti-snowflake" aria-hidden="true"></i> إبقاء مجمّداً</button>`;
+    } else {
+      h+=`<button class="btn-o" onclick="setDec('${pid}','o')"><i class="ti ti-circle-check" aria-hidden="true"></i> فتح</button>`;
+      h+=`<button class="btn-f" onclick="setDec('${pid}','f')"><i class="ti ti-snowflake" aria-hidden="true"></i> تجميد</button>`;
+    }
+  } else if(v==='o'){
+    h+=`<span class="dbadge db-o"><i class="ti ti-circle-check" aria-hidden="true"></i> مفتوح</span>`;
+    h+=`<button class="btn-f" style="margin-right:4px" onclick="clearDec('${pid}')" aria-label="إلغاء"><i class="ti ti-x" aria-hidden="true"></i></button>`;
+  } else if(v==='f'){
+    h+=`<span class="dbadge db-f"><i class="ti ti-snowflake" aria-hidden="true"></i> مجمَّد</span>`;
+    h+=`<button class="btn-o" style="margin-right:4px" onclick="clearDec('${pid}')" aria-label="إلغاء"><i class="ti ti-x" aria-hidden="true"></i></button>`;
+  } else if(v==='ro'){
+    h+=`<span class="dbadge db-ro"><i class="ti ti-lock-open" aria-hidden="true"></i> طلب إعادة فتح</span>`;
+    h+=`<button class="btn-f" style="margin-right:4px" onclick="clearDec('${pid}')" aria-label="إلغاء"><i class="ti ti-x" aria-hidden="true"></i></button>`;
+  }
+  cell.innerHTML=h;
+}
+
+function updateStats(){
+  let o=0,f=0;
+  for(const v of Object.values(dec)){if(v==='o'||v==='ro')o++;else if(v==='f')f++;}
+  document.getElementById('st-o').textContent=o;
+  document.getElementById('st-f').textContent=f;
+}
+
+function ffForm(pid,isFrozen){
+  const formClass=isFrozen?'ff frozen-form':'ff active-form';
+  const title=isFrozen
+    ?'طلب فتح تخصص مجمَّد — يُرجى تعبئة مسوّغات إعادة الفتح'
+    :'فتح التخصص — يُرجى تعبئة مسوّغات الفتح أو استمرار الفتح';
+  const reasonLabel=isFrozen?'مسوّغات إعادة الفتح والحاجة المجتمعية':'مسوّغات فتح/استمرار فتح التخصص والحاجة المجتمعية';
+  const reasonPlaceholder=isFrozen
+    ?'اذكر الطلب المتوقع، احتياجات سوق العمل، والمبرر الاستراتيجي لإعادة الفتح في العام الدراسي 2026/2027…'
+    :'اذكر الطلب المتوقع، احتياجات سوق العمل، والمبرر الأكاديمي لفتح أو استمرار فتح التخصص في العام الدراسي 2026/2027…';
+  return `<div class="${formClass}" id="ff-${pid}">
+    <div class="ff-title"><i class="ti ti-notes" aria-hidden="true"></i> ${title}</div>
+    <span class="flbl">${reasonLabel}</span>
+    <textarea placeholder="${reasonPlaceholder}" id="rat-${pid}"></textarea>
+    <span class="flbl">العدد المتوقع للطلاب المسجلين</span>
+    <input type="number" min="0" placeholder="عدد الطلاب المتوقع" id="enr-${pid}"/>
+    <div class="delivery-card">
+      <span class="flbl"><i class="ti ti-presentation" aria-hidden="true" style="font-size:13px;vertical-align:-1px"></i> نمط تقديم التعليم / Mode of Instruction Delivery</span>
+      <select id="mode-${pid}" aria-label="نمط تقديم التعليم">
+        <option value="" selected>اختر نمط تقديم التعليم</option>
+        <option value="electronic">إلكتروني</option>
+        <option value="face-to-face">وجاهي</option>
+        <option value="hybrid">هجين</option>
+      </select>
+    </div>
+    <div class="sec-div">المتطلبات والموارد اللازمة</div>
+    <div class="req-grid">
+      <div class="req-card">
+        <span class="flbl"><i class="ti ti-users" aria-hidden="true" style="font-size:13px;vertical-align:-1px"></i> الكادر التدريسي المطلوب</span>
+        <input type="text" placeholder="مثال: محاضران متفرغان في …" id="fac-${pid}"/>
+      </div>
+      <div class="req-card">
+        <span class="flbl"><i class="ti ti-tool" aria-hidden="true" style="font-size:13px;vertical-align:-1px"></i> التجهيزات والمعدات المطلوبة</span>
+        <input type="text" placeholder="مثال: معدات مختبر، أجهزة …" id="eq-${pid}"/>
+      </div>
+      <div class="req-card">
+        <span class="flbl"><i class="ti ti-building-community" aria-hidden="true" style="font-size:13px;vertical-align:-1px"></i> المختبرات والقاعات في الدوام الوجاهي أو الهجين</span>
+        <input type="text" placeholder="مثال: مختبر متخصص، سعة …" id="lab-${pid}"/>
+      </div>
+      <div class="req-card">
+        <span class="flbl"><i class="ti ti-cash" aria-hidden="true" style="font-size:13px;vertical-align:-1px"></i> الميزانية والتمويل</span>
+        <input type="text" placeholder="مثال: منحة أونروا، تمويل ذاتي" id="bud-${pid}"/>
+      </div>
+    </div>
+    <span class="flbl" style="margin-top:10px">ظروف خاصة أو مخاطر متوقعة</span>
+    <textarea placeholder="البنية التحتية، نزوح الكادر، قيود أمنية، أو اعتبارات خاصة بغزة…" id="risk-${pid}" style="min-height:48px"></textarea>
+  </div>`;
+}
+
+function buildRow(p){
+  const frzTag=p.frz?`<span class="ftag">مجمَّد</span>`:'';
+  const statusBadge=p.frz
+    ?`<span class="status-frz"><i class="ti ti-snowflake" aria-hidden="true"></i> مجمَّد</span>`
+    :`<span class="status-act"><i class="ti ti-circle-check" aria-hidden="true"></i> نشط</span>`;
+  const initDec=p.frz
+    ?`<button class="btn-ro" onclick="setDec('${p.id}','ro')"><i class="ti ti-lock-open" aria-hidden="true"></i> طلب الفتح</button><button class="btn-f sel" onclick="setDec('${p.id}','f')"><i class="ti ti-snowflake" aria-hidden="true"></i> إبقاء مجمّداً</button>`
+    :`<button class="btn-o" onclick="setDec('${p.id}','o')"><i class="ti ti-circle-check" aria-hidden="true"></i> فتح</button><button class="btn-f" onclick="setDec('${p.id}','f')"><i class="ti ti-snowflake" aria-hidden="true"></i> تجميد</button>`;
+  let rows=`<tr>
+    <td style="width:42%"><div class="pname">${frzTag}${p.name}</div><div class="plevel">${p.en}</div></td>
+    <td style="width:13%;text-align:center"><span style="font-size:12px;color:var(--text-secondary)">${p.lvl}</span></td>
+    <td style="width:15%;text-align:center">${statusBadge}</td>
+    <td style="width:30%;text-align:left"><div class="dcell" id="dc-${p.id}">${initDec}</div></td>
+  </tr>`;
+  rows+=`<tr><td colspan="4" style="padding:0 8px 8px;border-bottom:0.5px solid var(--border)">${ffForm(p.id,p.frz)}</td></tr>`;
+  return rows;
+}
+
+function buildDept(d){
+  const hasFrz=d.programs.some(p=>p.frz);
+  const bachs=d.programs.filter(p=>p.lvl==='بكالوريوس');
+  const dipls=d.programs.filter(p=>p.lvl==='دبلوم');
+
+  let h=`<div class="dept" id="dept-${d.id}">
+  <div class="dh" onclick="toggle('${d.id}')">
+    <i class="ti ti-chevron-down chev" id="c-${d.id}" aria-hidden="true" style="transform:rotate(180deg)"></i>
+    <div class="dh-r">
+      <div>
+        <div class="dtitle">${d.name}</div>
+        <div class="dsub">${d.sub} &nbsp;·&nbsp; ${d.programs.length} تخصصات</div>
+      </div>
+      <div class="dicon" style="${d.color}"><i class="ti ${d.icon}" aria-hidden="true"></i></div>
+    </div>
+  </div>
+  <div class="dbody open" id="b-${d.id}">`;
+
+  h+=`<div class="warn-box"><i class="ti ti-notes" aria-hidden="true" style="font-size:14px;flex-shrink:0;margin-top:1px"></i><span>تظهر خانات المسوّغات والمتطلبات فقط عند اختيار فتح التخصص أو طلب فتح تخصص مجمَّد.</span></div>`;
+
+  h+=`<div class="chair-row"><span class="chair-lbl">اسم رئيس القسم:</span><input class="chair-input" id="chair-${d.id}" type="text" placeholder="الاسم الكامل لرئيس القسم"/></div>`;
+
+  h+=`<table class="ptable"><thead><tr>
+    <th>التخصص</th>
+    <th style="text-align:center">الدرجة</th>
+    <th style="text-align:center">الحالة الحالية</th>
+    <th style="text-align:left">القرار</th>
+  </tr></thead><tbody>`;
+
+  if(bachs.length){
+    h+=`<tr class="cat-row"><td colspan="4">تخصصات البكالوريوس</td></tr>`;
+    bachs.forEach(p=>{h+=buildRow(p);});
+  }
+  if(dipls.length){
+    h+=`<tr class="cat-row"><td colspan="4">تخصصات الدبلوم</td></tr>`;
+    dipls.forEach(p=>{h+=buildRow(p);});
+  }
+
+  h+=`</tbody></table>
+  <div class="sub-bar">
+    <button class="btn-sub" onclick="submitDept('${d.id}')"><i class="ti ti-send" aria-hidden="true"></i> إرسال إلى الشؤون الأكاديمية</button>
+    <button class="btn-clear" onclick="clearDept('${d.id}')">مسح القسم</button>
+    <span class="ok-msg" id="ok-${d.id}"><i class="ti ti-circle-check" aria-hidden="true"></i> تم الإرسال بنجاح</span>
+  </div>
+  </div></div>`;
+  return h;
+}
+
+// دالة الإرسال المحدثة والمربوطة بجوجل شيت
+async function submitDept(id) {
+  const dept = DEPTS.find(d => d.id === id);
+  const chair = document.getElementById('chair-' + id).value.trim();
+  
+  if (!chair) { 
+    alert('يُرجى إدخال اسم رئيس القسم قبل الإرسال.'); 
+    return; 
+  }
+
+  const undec = dept.programs.filter(p => !dec[p.id]);
+  if (undec.length) {
+    if (!confirm(undec.length + ' تخصصات لم يُحدَّد لها قرار بعد. هل تريد الإرسال على أي حال؟')) return;
+  }
+
+  // تجميع البيانات للتخصصات التي تم اتخاذ قرار بشأنها فقط
+  const payload = {
+    departmentName: dept.name,
+    chairName: chair,
+    programs: []
+  };
+
+  dept.programs.forEach(p => {
+    if (dec[p.id]) { 
+      payload.programs.push({
+        programName: p.name,
+        degree: p.lvl,
+        previousStatus: p.frz ? 'مجمّد' : 'نشط',
+        decision: dec[p.id],
+        mode: document.getElementById('mode-' + p.id) ? document.getElementById('mode-' + p.id).value : '',
+        justification: document.getElementById('rat-' + p.id) ? document.getElementById('rat-' + p.id).value : '',
+        expectedEnrollment: document.getElementById('enr-' + p.id) ? document.getElementById('enr-' + p.id).value : '',
+        staff: document.getElementById('fac-' + p.id) ? document.getElementById('fac-' + p.id).value : '',
+        equipment: document.getElementById('eq-' + p.id) ? document.getElementById('eq-' + p.id).value : '',
+        labs: document.getElementById('lab-' + p.id) ? document.getElementById('lab-' + p.id).value : '',
+        budget: document.getElementById('bud-' + p.id) ? document.getElementById('bud-' + p.id).value : '',
+        risks: document.getElementById('risk-' + p.id) ? document.getElementById('risk-' + p.id).value : ''
+      });
+    }
+  });
+
+  if (payload.programs.length === 0) {
+    alert('لم يتم اتخاذ أي قرارات لإرسالها.');
+    return;
+  }
+
+  // تغيير حالة الزر لتوضيح عملية الإرسال
+  const btn = document.querySelector(`#dept-${id} .btn-sub`);
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<i class="ti ti-loader" aria-hidden="true"></i> جاري الإرسال...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  // الرابط الخاص بك: يُرجى استبدال النص بالرابط الكامل الذي نسخته من جوجل
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfyYtNwy65x2I3AYxjNU-9zK7EkSXCwRatBSTU18DU8F67Pg_0CBACRki312gRMFPe/exec'; 
+
+  try {
+    // إرسال البيانات باستخدام Fetch API
+    const response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload) 
+    });
+
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      const ok = document.getElementById('ok-' + id);
+      ok.style.display = 'inline-flex';
+      setTimeout(() => ok.style.display = 'none', 3500);
+    } else {
+      alert('حدث خطأ أثناء حفظ البيانات: ' + result.message);
+    }
+  } catch (error) {
+    alert('حدث خطأ في الاتصال. يرجى التأكد من اتصالك بالإنترنت وأن رابط السكربت صحيح.');
+    console.error(error);
+  } finally {
+    // إعادة الزر لحالته الطبيعية
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+
+function clearDept(id){
+  if(!confirm('هل تريد مسح جميع القرارات في هذا القسم؟'))return;
+  const dept=DEPTS.find(d=>d.id===id);
+  dept.programs.forEach(p=>{
+    delete dec[p.id];
+    const ff=document.getElementById('ff-'+p.id);if(ff)ff.classList.remove('show');
+    renderCell(p.id);
+  });
+  document.getElementById('chair-'+id).value='';
+  updateStats();
+}
+
+const dc=document.getElementById('dc');
+DEPTS.forEach(d=>{dc.innerHTML+=buildDept(d);});
+document.getElementById('st-total').textContent=calcTotal();
+document.querySelectorAll('.ff').forEach(el=>el.classList.remove('show'));
+</script>
